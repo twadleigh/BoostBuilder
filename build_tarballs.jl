@@ -3,7 +3,7 @@
 using BinaryBuilder
 
 name = "Boost"
-version = v"1.68.0-0"
+version = v"1.68.0"
 
 # Collection of sources required to build Boost
 sources = [
