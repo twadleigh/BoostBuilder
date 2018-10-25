@@ -23,7 +23,7 @@ cd $WORKSPACE/srcdir/boost_1_68_0/
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
-    Linux(:i686, libc=:glibc),
+    # Linux(:i686, libc=:glibc),
     Linux(:x86_64, libc=:glibc),
     Linux(:x86_64, libc=:musl)
 ]
