@@ -1,8 +1,8 @@
 language: julia
 os:
-  - linux
+- linux
 julia:
-  - 1.0
+- 1.0
 notifications:
   email: false
 git:
@@ -10,17 +10,23 @@ git:
 cache:
   timeout: 1000
   directories:
-    - downloads
+  - downloads
 env:
   global:
-    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
-    - BINARYBUILDER_AUTOMATIC_APPLE=false
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_AUTOMATIC_APPLE=false
 sudo: required
-
-# Before anything else, get the latest versions of things
 before_script:
-  - julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
-
+- julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
 script:
-  - julia build_tarballs.jl
-
+- julia build_tarballs.jl
+deploy:
+  provider: releases
+  api_key:
+    secure: mXbMCPNx9AHSXeLtlx9SruaU2VfDd+bjhb80RWm1IaMbiPRABwZXGAAPM3aFsxLBsEwXDvJvT40mOLfbWz1t72sfFMUIkSwFEU1ycO7KOoqUkDgzwrIXezENDnuC97BhiUA03r45m3/SeW4ukEsg40n+8Syp1x32JGBmpZYrbKctAYAkHOgq8kROhjuG21tQULcXL8l6h6u4wOOpp7S0agEUj8tQ1nr6aGPs1kM8wY0PeqpGZtyykeG73XThAtibedqFWjY4ruBdr0yXntxSDedrNntw6SSL0qLnhwkhLXDTCqR/3jMOLt1T1BlEm4Cr0PoFi9VUKr2DeX/2Kjrdx5Mihg2yqgyLBQ5GAz1Zh6XYVXqEw31b9lQQe690JzVOir01PDZTaawWTeA224WcompnWbtWqCjtwHaqEaqLoJuXM7ck/L7qqZR4Pnip0l5/xyidqHQq+vle2Ci5bhZNdPzVOeFHWXUg2W83xecVSqmWWMqDxtVHGz3h7LKXS8xYkjxwivqNLzC/zEKS9Yxg3aT1ZGwD2aKvrNTxvNdLQn2jXb+EbsitQdkfbQiMAm2w1JleFYiHclhZnV3+5FFB811APDVIKNrujp/SskWCkmKlV4BttQz/+Wyu9OGVtAtRjs9sXPiu9v1O1buN1EpHHvn+CXwvI7xQhLVfnhhljio=
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: twadleigh/BoostBuilder
+    tags: true
