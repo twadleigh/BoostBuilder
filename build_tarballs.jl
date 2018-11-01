@@ -16,6 +16,7 @@ sources = [
 script = raw"""
 cd $WORKSPACE/srcdir/boost_1_68_0/
 ./bootstrap.sh --prefix=$prefix
+apk add python-dev
 ./b2 -j$nproc --layout=system install
 
 """
